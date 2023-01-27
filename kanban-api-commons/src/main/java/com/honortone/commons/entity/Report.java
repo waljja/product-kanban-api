@@ -1,11 +1,11 @@
 package com.honortone.commons.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.HeadStyle;
+import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 /**
  * 报表实体类
@@ -17,18 +17,25 @@ import java.util.Date;
 @Getter
 @EqualsAndHashCode
 public class Report {
-    @ExcelProperty({"鸿通成品入库报表", "item"})
+    @ExcelProperty({"item"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 44)
     Integer item;
-    @ExcelProperty({"鸿通成品入库报表", "数量"})
+    @ExcelProperty({"数量"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 44)
     Integer number;
-    @ExcelProperty({"鸿通成品入库报表", "状态"})
+    @ExcelProperty({"状态"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 44)
     Integer state;
-    @ExcelProperty({"鸿通成品入库报表", "PartNumber"})
+    @ExcelProperty({"PartNumber"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 42)
     String partNumber;
-    @ExcelProperty({"鸿通成品入库报表", "批次号码"})
+    @ExcelProperty({"批次号码"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 42)
     String batchId;
-    @ExcelProperty({"鸿通成品入库报表", "工单"})
+    @ExcelProperty({"工单"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 47)
     String wo;
-    @ExcelProperty({"鸿通成品入库报表", "收货时间"})
-    Date receivingTime;
+    @ExcelProperty({"收货时间"})
+    @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 47)
+    String receivingTime;
 }

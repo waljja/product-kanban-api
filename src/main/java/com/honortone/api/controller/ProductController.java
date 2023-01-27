@@ -63,13 +63,15 @@ public class ProductController {
         List<Report> list = ListUtils.newArrayList();
         for (int i = 0; i < 10; i++) {
             Report data = new Report();
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             data.setItem(i);
             data.setNumber(i);
             data.setState(2);
             data.setPartNumber("641-");
             data.setBatchId("000002");
             data.setWo("1623232");
-            data.setReceivingTime(new Date());
+            data.setReceivingTime(format.format(date));
             list.add(data);
         }
         return list;
