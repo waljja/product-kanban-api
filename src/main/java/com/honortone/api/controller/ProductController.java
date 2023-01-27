@@ -9,7 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -42,16 +46,21 @@ public class ProductController {
      *
      * @return
      */
-    @GetMapping ("/download/report")
-    public CommonResult generateProductReport() {
+    @ResponseBody
+    @GetMapping (path = "/download/report")
+    public void downloadProductReport(HttpServletResponse response) throws IOException {
         String d = "data";
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         // 报表文件名称
-        String fileName = "C:/Users/黄金脆皮鸡lone/Desktop/成品入库报表" + format.format(date) + ".xlsx";
+        String fileName = URLEncoder
+                .encode("成品入库报表(" + format.format(date) + ")", "UTF-8")
+                .replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName, Report.class).sheet("成品入库报表模板").doWrite(data());
-        return new CommonResult(200, "成功", d);
+        EasyExcel.write(response.getOutputStream(), Report.class).sheet("成品入库报表模板").doWrite(data());
     }
 
     /**

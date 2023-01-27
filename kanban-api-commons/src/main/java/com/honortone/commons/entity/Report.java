@@ -38,7 +38,7 @@ public class Report {
     @ExcelProperty({"批次号码"})
     @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 42)
     String batchId;
-    @ColumnWidth(10)
+    @ColumnWidth(20)
     @ExcelProperty({"工单"})
     @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 47)
     String wo;
