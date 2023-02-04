@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honortone.api.mapper.InventoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.honortone.commons.entity.Inventory">
+        <id column="ID" property="id" />
+        <result column="PartNumber" property="partNumber" />
+        <result column="Batch" property="batch" />
+        <result column="UID" property="uid" />
+        <result column="Quantity" property="quantity" />
+        <result column="Stock" property="stock" />
+        <result column="Status" property="status" />
+        <result column="WO" property="wo" />
+        <result column="RecTime" property="recTime" />
+        <result column="Plant" property="plant" />
+        <result column="CreateUser" property="createUser" />
+        <result column="CreateTime" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+         ID, PartNumber, Batch, UID, Quantity, Stock, Status, WO, RecTime, Plant, CreateUser, CreateTime
+    </sql>
+    <select id="findAll" resultType="com.honortone.commons.entity.Inventory">
+        select
+            ID, PartNumber, Batch, UID, Quantity, Stock, Status, WO, RecTime, Plant, CreateUser, CreateTime
+        from
+            HTMES_FGManagement_DB
+    </select>
+
+</mapper>

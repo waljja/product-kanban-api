@@ -2,9 +2,15 @@ package com.honortone.api.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.util.ListUtils;
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.honortone.api.service.IInventoryService;
+import com.honortone.commons.entity.Inventory;
 import com.honortone.commons.entity.Report;
 import com.honortone.commons.result.CommonResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +34,27 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController {
+    @Autowired
+    IInventoryService inventoryService;
+
     /**
      * 获取成品入库看板数据
      *
-     * @param date
-     *        前端筛选日期
+     * @param startDate
+     *        开始日期
+     * @param endDate
+     *        结束日期
      * @return
      */
     @GetMapping("/get-data")
-    public CommonResult getProductData(@RequestParam(required = false) Date date) {
+    public CommonResult getProductData(@RequestParam(value = "startDate",required = false) Date startDate,
+                                       @RequestParam(value = "endDate", required = false) Date endDate) {
         String data = "data";
+        // 日期筛选
+        QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.ge("createTime", startDate).le("createTime", endDate);
+        Page<Inventory> inventoryPage = new Page<>(1 , 20);
+        Page<Inventory> inventoryList = inventoryService.findByCreateTime(inventoryPage);
         return new CommonResult(200, "成功", data);
     }
 
