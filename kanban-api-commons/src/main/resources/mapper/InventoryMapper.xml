@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.honortone.api.mapper.InventoryMapper">
+<mapper namespace="com.honortone.commons.mapper.InventoryMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.honortone.commons.entity.Inventory">
@@ -18,13 +18,9 @@
         <result column="CreateDate" property="createDate" />
     </resultMap>
 
-    <!-- ew.customSqlSegment -> 条件构造器拼接语句（一定要加，否则会出现变量设置问题） -->
-    <select id="findByCreateTime" resultMap="BaseResultMap">
-        select * from FG_Inventory ${ew.customSqlSegment}
-    </select>
-
-    <select id="findAll" resultMap="BaseResultMap">
-        select * from FG_Inventory
-    </select>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, PartNumber, Batch, UID, Quantity, Stock, Status, WO, RecTime, Plant, CreateUser, CreateDate
+    </sql>
 
 </mapper>

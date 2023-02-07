@@ -8,14 +8,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>
- * 成品库存表
+ * 
  * </p>
  *
  * @author 丁国钊
- * @since 2023-02-04
+ * @since 2023-02-07
  */
 @TableName("FG_Inventory")
-@ApiModel(value = "Inventory对象", description = "成品库存表")
+@ApiModel(value = "Inventory对象", description = "")
 public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,19 +32,19 @@ public class Inventory implements Serializable {
     private String uid;
 
     @ApiModelProperty("数量")
-    private String quantity;
+    private Integer quantity;
 
     @ApiModelProperty("库位号")
     private String stock;
 
     @ApiModelProperty("状态")
-    private String status;
+    private Integer status;
 
     @ApiModelProperty("工单")
     private String wo;
 
     @ApiModelProperty("收货时间")
-    private String recTime;
+    private LocalDateTime recTime;
 
     @ApiModelProperty("工厂")
     private String plant;
@@ -53,7 +53,7 @@ public class Inventory implements Serializable {
     private String createUser;
 
     @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
+    private LocalDateTime createDate;
 
     public String getId() {
         return id;
@@ -83,11 +83,11 @@ public class Inventory implements Serializable {
     public void setUid(String uid) {
         this.uid = uid;
     }
-    public String getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
     public String getStock() {
@@ -97,11 +97,11 @@ public class Inventory implements Serializable {
     public void setStock(String stock) {
         this.stock = stock;
     }
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
     public String getWo() {
@@ -111,11 +111,11 @@ public class Inventory implements Serializable {
     public void setWo(String wo) {
         this.wo = wo;
     }
-    public String getRecTime() {
+    public LocalDateTime getRecTime() {
         return recTime;
     }
 
-    public void setRecTime(String recTime) {
+    public void setRecTime(LocalDateTime recTime) {
         this.recTime = recTime;
     }
     public String getPlant() {
@@ -132,12 +132,12 @@ public class Inventory implements Serializable {
     public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
     @Override
@@ -154,7 +154,7 @@ public class Inventory implements Serializable {
             ", recTime=" + recTime +
             ", plant=" + plant +
             ", createUser=" + createUser +
-            ", createTime=" + createTime +
+            ", createDate=" + createDate +
         "}";
     }
 }
