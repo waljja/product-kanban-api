@@ -30,7 +30,7 @@ public interface InventoryMapper extends BaseMapper<Inventory> {
      *        条件构造器
      * @return
      */
-    Page<Inventory> findByCreateTime(Page page, @Param("ew") QueryWrapper queryWrapper);
+    Page<Inventory> findByCreateDate(Page page, @Param("ew") QueryWrapper queryWrapper);
 
     /**
      * 查找所有 成品入库 数据

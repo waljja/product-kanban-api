@@ -19,7 +19,7 @@
     </resultMap>
 
     <!-- ew.customSqlSegment -> 条件构造器拼接语句（一定要加，否则会出现变量设置问题） -->
-    <select id="findByCreateTime" resultMap="BaseResultMap">
+    <select id="findByCreateDate" resultMap="BaseResultMap">
         select * from FG_Inventory ${ew.customSqlSegment}
     </select>
 

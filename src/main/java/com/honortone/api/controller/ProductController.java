@@ -2,10 +2,9 @@ package com.honortone.api.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.util.ListUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.honortone.api.mapper.InventoryMapper;
-import com.honortone.api.service.IInventoryService;
+import com.honortone.api.service.ProductService;
 import com.honortone.commons.entity.Inventory;
 import com.honortone.commons.entity.Report;
 import com.honortone.commons.result.CommonResult;
@@ -21,11 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 成品入库看板 Controller
@@ -39,7 +36,7 @@ import java.util.Map;
 @RequestMapping(value = "/product")
 public class ProductController {
     @Autowired
-    IInventoryService inventoryService;
+    ProductService productService;
     @Autowired
     InventoryMapper inventoryMapper;
 
@@ -54,31 +51,11 @@ public class ProductController {
      */
     @ResponseBody
     @GetMapping("/get-data")
-    public CommonResult<Page<Inventory>> getProductData(@RequestParam(value = "startDate",required = false) String startDate,
-                                       @RequestParam(value = "endDate", required = false) String endDate) {
-        List<Inventory> inventoryList;
-        // 每页 20 条数据
-        Page inventoryPage = new Page(1, 20);
-        // 开始日期非空
-        boolean sNotNull = !(startDate == null || startDate.isEmpty());
-        // 结束日期非空
-        boolean eNoTNull = !(endDate == null || endDate.isEmpty());
-        // 日期都不为空 -> 按时间范围查询
-        if (sNotNull && eNoTNull) {
-            QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
-            // ge 为 >=，le 为 <=
-            queryWrapper.ge("CreateDate", startDate)
-                    .le("CreateDate", endDate);
-            Page<Inventory> inventoryPageList = inventoryService.findByCreateTime(inventoryPage, queryWrapper);
-            inventoryList = inventoryPageList.getRecords();
-
-            return new CommonResult(200, "查询成功", inventoryList);
-        } else { // 有一个为空 -> 不按时间条件查询
-            Page<Inventory> inventoryPageList = inventoryService.findAll(inventoryPage);
-            inventoryList = inventoryPageList.getRecords();
-
-            return new CommonResult(200, "查询成功", inventoryList);
-        }
+    public CommonResult<Page<Inventory>> getProductData(@RequestParam(value = "current") int current,
+                                                        @RequestParam(value = "startDate", required = false) String startDate,
+                                                        @RequestParam(value = "endDate", required = false) String endDate) {
+        List<Inventory> inventoryList = productService.getPageList(current, startDate, endDate);
+        return new CommonResult(200, "查询成功", inventoryList);
     }
 
     /**

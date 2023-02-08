@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.honortone.api.mapper.InventoryMapper;
 import com.honortone.api.service.IInventoryService;
 import com.honortone.commons.entity.Inventory;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,8 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
     InventoryMapper inventoryMapper;
 
     @Override
-    public Page<Inventory> findByCreateTime(Page page, QueryWrapper queryWrapper) {
-        return inventoryMapper.findByCreateTime(page, queryWrapper);
+    public Page<Inventory> findByCreateDate(Page page, QueryWrapper queryWrapper) {
+        return inventoryMapper.findByCreateDate(page, queryWrapper);
     }
 
     @Override

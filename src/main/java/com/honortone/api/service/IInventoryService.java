@@ -25,7 +25,7 @@ public interface IInventoryService extends IService<Inventory> {
      *        条件构造器
      * @return
      */
-    Page<Inventory> findByCreateTime(Page page, QueryWrapper queryWrapper);
+    Page<Inventory> findByCreateDate(Page page, QueryWrapper queryWrapper);
 
     /**
      * 查找所有 成品库存 信息
