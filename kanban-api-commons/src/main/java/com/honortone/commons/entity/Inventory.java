@@ -23,6 +23,9 @@ public class Inventory implements Serializable {
 
     private String id;
 
+    @ApiModelProperty("序号")
+    private Integer item;
+
     @ApiModelProperty("型号")
     private String partNumber;
 
@@ -62,6 +65,13 @@ public class Inventory implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+    public Integer getItem() {
+        return item;
+    }
+
+    public void setItem(Integer item) {
+        this.item = item;
     }
     public String getPartNumber() {
         return partNumber;

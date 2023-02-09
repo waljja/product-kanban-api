@@ -5,7 +5,7 @@ import com.alibaba.excel.util.ListUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.honortone.api.mapper.InventoryMapper;
 import com.honortone.api.service.ProductService;
-import com.honortone.commons.entity.Inventory;
+import com.honortone.commons.entity.Product;
 import com.honortone.commons.entity.Report;
 import com.honortone.commons.result.CommonResult;
 import io.swagger.annotations.Api;
@@ -43,6 +43,8 @@ public class ProductController {
     /**
      * 获取成品入库看板数据
      *
+     * @param current
+     *        当前页码
      * @param startDate
      *        开始日期
      * @param endDate
@@ -51,10 +53,11 @@ public class ProductController {
      */
     @ResponseBody
     @GetMapping("/get-data")
-    public CommonResult<Page<Inventory>> getProductData(@RequestParam(value = "current") int current,
+    public CommonResult<Page<Product>> getProductData(@RequestParam(value = "current") int current,
                                                         @RequestParam(value = "startDate", required = false) String startDate,
                                                         @RequestParam(value = "endDate", required = false) String endDate) {
-        List<Inventory> inventoryList = productService.getPageList(current, startDate, endDate);
+        Page<Product> inventoryList = productService.getPageList(current, startDate, endDate);
+
         return new CommonResult(200, "查询成功", inventoryList);
     }
 

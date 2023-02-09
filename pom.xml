@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.honortone</groupId>
-    <artifactId>product-kanban-api</artifactId>
+    <artifactId>product-management-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>product-kanban-api</name>
+    <name>product-management-api</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>8</java.version>

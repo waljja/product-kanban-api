@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.honortone.commons.entity.Inventory;
-
-import java.util.Map;
+import com.honortone.commons.entity.Product;
 
 /**
  * <p>
@@ -25,13 +24,16 @@ public interface IInventoryService extends IService<Inventory> {
      *        条件构造器
      * @return
      */
-    Page<Inventory> findByCreateDate(Page page, QueryWrapper queryWrapper);
+    Page<Product> findByCreateDate(Page page, QueryWrapper queryWrapper);
 
     /**
      * 查找所有 成品库存 信息
      *
-     * @param inventoryPage
+     * @param page
+     *        分页配置
+     * @param queryWrapper
+     *        条件构造器
      * @return
      */
-    Page<Inventory> findAll(Page inventoryPage);
+    Page<Product> findAll(Page page, QueryWrapper queryWrapper);
 }

@@ -1,8 +1,8 @@
 package com.honortone.api.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.honortone.commons.entity.Inventory;
-
-import java.util.List;
+import com.honortone.commons.entity.Product;
 
 /**
  * 成品入库看板 service
@@ -22,5 +22,5 @@ public interface ProductService {
      *        结束日期
      * @return
      */
-    List<Inventory> getPageList(int current, String startDate, String endDate);
+    Page<Product> getPageList(int current, String startDate, String endDate);
 }

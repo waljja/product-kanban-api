@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.honortone.api.mapper.InventoryMapper;
+import com.honortone.api.mapper.ProductMapper;
 import com.honortone.api.service.IInventoryService;
 import com.honortone.commons.entity.Inventory;
+import com.honortone.commons.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +22,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory> implements IInventoryService {
     @Autowired
-    InventoryMapper inventoryMapper;
+    ProductMapper productMapper;
 
     @Override
-    public Page<Inventory> findByCreateDate(Page page, QueryWrapper queryWrapper) {
-        return inventoryMapper.findByCreateDate(page, queryWrapper);
+    public Page<Product> findByCreateDate(Page page, QueryWrapper queryWrapper) {
+        return productMapper.findByCreateDate(page, queryWrapper);
     }
 
     @Override
-    public Page<Inventory> findAll(Page page) {
-        return inventoryMapper.findAll(page);
+    public Page<Product> findAll(Page page, QueryWrapper queryWrapper) {
+        return productMapper.findAll(page, queryWrapper);
     }
 }
