@@ -37,8 +37,8 @@ public class ProductServiceImpl implements ProductService {
             QueryWrapper<Inventory> queryWrapper = new QueryWrapper<>();
             // 根据日期范围查询，SQL Server 分页必须有 order 排序
             queryWrapper
-                    .apply("convert(VARCHAR(20),CreateDate,21) >= '" + startDate + "'")
-                    .apply("convert(VARCHAR(20),CreateDate,21) <= '" + endDate + "'")
+                    .apply("CONVERT(VARCHAR(20),CreateDate,21) >= '" + startDate + "'")
+                    .apply("CONVERT(VARCHAR(20),CreateDate,21) <= '" + endDate + "'")
                     .orderByAsc("CreateDate");
             inventoryPageList = inventoryService.findByCreateDate(inventoryPage, queryWrapper);
         } else { // 有一个为空 -> 不按时间条件查询

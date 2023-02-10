@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.util.ListUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.honortone.api.mapper.InventoryMapper;
+import com.honortone.api.service.IReportFillService;
 import com.honortone.api.service.ProductService;
 import com.honortone.commons.entity.Product;
 import com.honortone.commons.entity.Report;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
-    InventoryMapper inventoryMapper;
+    IReportFillService reportFillService;
 
     /**
      * 获取成品入库看板数据
@@ -69,7 +71,6 @@ public class ProductController {
     @ResponseBody
     @GetMapping (path = "/report/download")
     public void downloadProductReport(HttpServletResponse response) throws IOException {
-        String d = "data";
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         // 报表文件名称
@@ -80,7 +81,10 @@ public class ProductController {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(response.getOutputStream(), Report.class).sheet("成品入库报表模板").doWrite(data());
+        EasyExcel
+                .write(response.getOutputStream(), Report.class)
+                .sheet("成品入库报表模板")
+                .doWrite(reportFillService.getFillData());
     }
 
     /**
@@ -92,8 +96,7 @@ public class ProductController {
         List<Report> list = ListUtils.newArrayList();
         for (int i = 0; i < 10; i++) {
             Report data = new Report();
-            Date date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            LocalDateTime localDateTime = LocalDateTime.now();
             data.setItem(i);
             data.setPartNumber("641-");
             data.setWo("1623232");
@@ -103,9 +106,9 @@ public class ProductController {
             data.setQuantity(Double.valueOf(i) + 0.5);
             data.setState((short) 1);
             data.setStorageLoc("A001");
-            data.setReceivingTime(format.format(date));
+            data.setRecTime(localDateTime);
             data.setCreateUser("丁国钊");
-            data.setCreateDate(format.format(date));
+            data.setCreateDate(localDateTime);
             list.add(data);
         }
         return list;

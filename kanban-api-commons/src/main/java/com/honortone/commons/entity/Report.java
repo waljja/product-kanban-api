@@ -1,10 +1,8 @@
 package com.honortone.commons.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
-import com.alibaba.excel.annotation.write.style.ContentRowHeight;
-import com.alibaba.excel.annotation.write.style.ContentStyle;
-import com.alibaba.excel.annotation.write.style.HeadStyle;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.alibaba.excel.annotation.write.style.*;
 import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
 import com.alibaba.excel.enums.poi.HorizontalAlignmentEnum;
 import com.alibaba.excel.enums.poi.VerticalAlignmentEnum;
@@ -12,8 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
- * 报表实体类
+ * 报表填充实体类
  *
  * @author 丁国钊
  * @date 2023-1-26
@@ -21,6 +21,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @EqualsAndHashCode
+@HeadRowHeight(30)
 @ContentRowHeight(20)
 @ContentStyle(horizontalAlignment = HorizontalAlignmentEnum.CENTER, verticalAlignment = VerticalAlignmentEnum.CENTER)
 public class Report {
@@ -69,8 +70,9 @@ public class Report {
 
     @ColumnWidth(25)
     @ExcelProperty({"收货时间"})
+    @DateTimeFormat("yyyy-MM-dd HH:mm:ss")
     @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 47)
-    String receivingTime;
+    private LocalDateTime recTime;
 
     @ColumnWidth(15)
     @ExcelProperty({"创建人"})
@@ -79,6 +81,7 @@ public class Report {
 
     @ColumnWidth(25)
     @ExcelProperty({"创建时间"})
+    @DateTimeFormat("yyyy-MM-dd HH:mm:ss")
     @HeadStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 43)
-    private String createDate;
+    private LocalDateTime createDate;
 }

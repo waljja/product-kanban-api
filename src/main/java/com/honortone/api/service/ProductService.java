@@ -1,7 +1,6 @@
 package com.honortone.api.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.honortone.commons.entity.Inventory;
 import com.honortone.commons.entity.Product;
 
 /**

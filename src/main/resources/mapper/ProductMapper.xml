@@ -22,7 +22,7 @@
     <!-- ew.customSqlSegment -> 条件构造器拼接语句（一定要加，否则会出现变量设置问题） -->
     <!-- 字段不能加 []，mybatis plus 不能识别 []，有 bug -->
     <select id="findByCreateDate" resultMap="BaseResultMap">
-        select row_number() over(order by CreateDate) as item,
+        select
             row_number() over(order by CreateDate) as item,*
         from
             FG_Inventory ${ew.customSqlSegment}

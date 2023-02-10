@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.honortone.commons.entity.Inventory;
 import com.honortone.commons.entity.Product;
+import com.honortone.commons.entity.Report;
+
+import java.util.List;
 
 /**
  * <p>
@@ -36,4 +39,13 @@ public interface IInventoryService extends IService<Inventory> {
      * @return
      */
     Page<Product> findAll(Page page, QueryWrapper queryWrapper);
+
+    /**
+     * 查找今日数据（报表）
+     *
+     * @param queryWrapper
+     *        条件构造器
+     * @return
+     */
+    List<Report> findToday(QueryWrapper queryWrapper);
 }

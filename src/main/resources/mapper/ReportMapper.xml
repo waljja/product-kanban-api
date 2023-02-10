@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honortone.api.mapper.ReportMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.honortone.commons.entity.Report">
+        <result column="item" property="item" />
+        <result column="PartNumber" property="partNumber" />
+        <result column="WO" property="wo" />
+        <result column="Batch" property="batch" />
+        <result column="UID" property="uid" />
+        <result column="Plant" property="plant" />
+        <result column="Quantity" property="quantity" />
+        <result column="Status" property="state" />
+        <result column="Stock" property="storageLoc" />
+        <result column="RecTime" property="recTime" />
+        <result column="CreateUser" property="createUser" />
+        <result column="CreateDate" property="createDate" />
+    </resultMap>
+
+    <select id="findToday" resultMap="BaseResultMap">
+        select
+            row_number() over(order by WO,CONVERT(int,Batch)) as item,*
+        from
+            FG_Inventory ${ew.customSqlSegment}
+    </select>
+
+</mapper>
