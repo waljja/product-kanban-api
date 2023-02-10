@@ -67,7 +67,7 @@ public class ProductController {
      * @return
      */
     @ResponseBody
-    @GetMapping (path = "/download/report")
+    @GetMapping (path = "/report/download")
     public void downloadProductReport(HttpServletResponse response) throws IOException {
         String d = "data";
         Date date = new Date();
@@ -95,12 +95,17 @@ public class ProductController {
             Date date = new Date();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             data.setItem(i);
-            data.setNumber(i);
-            data.setState(2);
             data.setPartNumber("641-");
-            data.setBatchId("000002");
             data.setWo("1623232");
+            data.setBatch("000002");
+            data.setUid("000001623232/B" + i);
+            data.setPlant("1100");
+            data.setQuantity(Double.valueOf(i) + 0.5);
+            data.setState((short) 1);
+            data.setStorageLoc("A001");
             data.setReceivingTime(format.format(date));
+            data.setCreateUser("丁国钊");
+            data.setCreateDate(format.format(date));
             list.add(data);
         }
         return list;

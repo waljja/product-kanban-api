@@ -36,13 +36,13 @@ public class Product implements Serializable {
     private String uid;
 
     @ApiModelProperty("数量")
-    private Integer quantity;
+    private Double quantity;
 
     @ApiModelProperty("库位号")
     private String storageLoc;
 
     @ApiModelProperty("状态")
-    private Integer state;
+    private Short state;
 
     @ApiModelProperty("工单")
     private String wo;
